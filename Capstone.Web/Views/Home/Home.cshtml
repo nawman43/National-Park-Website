@@ -1,0 +1,16 @@
+﻿@using Capstone.Web.Models
+@model List<ParkModel>
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+@foreach (ParkModel park in Model)
+{
+    <div> @park.ParkName</div>   
+    <div><a href="@Url.Action("Detail","Home", new {id = park.ParkCode })">
+        <img src="@Url.Content("~/Content/img/parks/" + park.ParkCode + ".jpg")" /></a></div>
+    <div> @park.State</div>
+    <div>@park.ParkDescription</div>
+}

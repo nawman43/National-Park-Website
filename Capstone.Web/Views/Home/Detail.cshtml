@@ -1,0 +1,37 @@
+﻿@using Capstone.Web.Models
+@model ParkModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.ParkName</h2>
+
+<div><img src="@Url.Content("~/Content/img/parks/" + Model.ParkCode + ".jpg")" /></div>
+
+
+<p>@Model.State</p>
+<p>@Model.Acreage</p>
+<p>@Model.EleveationInFeet</p>
+<p>@Model.MilesOfTrail</p>
+<p>@Model.NumbereOfCampsites</p>
+<p>@Model.Climate</p>
+<p>@Model.YearFounded</p>
+<p>@Model.AnnualVisitorCount</p>
+<p>@Model.InspirationalQuote</p>
+<p>@Model.QuoteSource</p>
+<p>@Model.ParkDescription</p>
+<p>@Model.EntryrFee</p>
+<p>@Model.NumberOfAnimalSpecies</p>
+
+@foreach (var item in Model.Weather)
+{
+    <div>
+        @if (item.Forecast == "rain")
+        {
+
+        }
+
+    </div>
+    <div>@item.Forecast</div>
+}
