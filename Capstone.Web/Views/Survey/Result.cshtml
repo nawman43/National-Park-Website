@@ -1,0 +1,22 @@
+﻿@using Capstone.Web.Models
+@model List<SurveyModel>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="top-ranked-parks">Top Ranking Parks</h2>
+
+@foreach (var r in Model)
+{
+    <table>
+        <tr>
+            <td><img class="smaller" src="@Url.Content("~/Content/img/parks/" + r.FavPark + ".jpg")" /></td>
+            <td class="survey-result-name">@r.ParkName</td>
+            <br />
+            <br />
+            <td class="survey-result-votes">Total Votes: @r.total</td>
+        </tr>
+        <hr />
+    </table> 
+}

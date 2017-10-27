@@ -12,5 +12,7 @@ namespace Capstone.Web.DAL
         List<ParkModel> AllParks();
         ParkModel GetPark(string parkCode);
         List<WeatherModel> GetWeather(string parkCode);
+        void NewSurvey(SurveyModel s);
+        List<SurveyModel> SurveyResults();
     }
 }

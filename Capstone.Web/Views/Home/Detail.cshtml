@@ -7,31 +7,69 @@
 
 <h2>@Model.ParkName</h2>
 
-<div><img src="@Url.Content("~/Content/img/parks/" + Model.ParkCode + ".jpg")" /></div>
+<div><img style="float:left" src="@Url.Content("~/Content/img/parks/" + Model.ParkCode + ".jpg")" /></div>
 
-
-<p>@Model.State</p>
-<p>@Model.Acreage</p>
-<p>@Model.EleveationInFeet</p>
-<p>@Model.MilesOfTrail</p>
-<p>@Model.NumbereOfCampsites</p>
-<p>@Model.Climate</p>
-<p>@Model.YearFounded</p>
-<p>@Model.AnnualVisitorCount</p>
-<p>@Model.InspirationalQuote</p>
-<p>@Model.QuoteSource</p>
-<p>@Model.ParkDescription</p>
-<p>@Model.EntryrFee</p>
-<p>@Model.NumberOfAnimalSpecies</p>
-
+<div>
+    <div style="text-align:center">
+        <p><b>State:</b> @Model.State</p>
+        <p><b>Acreage:</b>@Model.Acreage.ToString("N0")</p>
+        <p><b>Elevation:</b>@Model.EleveationInFeet.ToString("N0") ft.</p>
+        <p><b>Trail Miles:</b>@Model.MilesOfTrail.ToString("N0")</p>
+        <p><b>Number of Campsites:</b>@Model.NumbereOfCampsites</p>
+        <p><b>Climate:</b>@Model.Climate</p>
+        <p><b>Year Founded:</b>@Model.YearFounded.ToString("N0")</p>
+        <p><b>Annual Visitor Count:</b>@Model.AnnualVisitorCount.ToString("N0")</p>
+        <p><b>Entry Fee:</b>@Model.EntryrFee.ToString("C")</p>
+        <p><b>Number of Animal Species:</b>@Model.NumberOfAnimalSpecies</p>
+        <p><i>"@Model.InspirationalQuote" - @Model.QuoteSource</i></p>     
+       
+    </div>
+</div>
+<br />
 @foreach (var item in Model.Weather)
 {
-    <div>
-        @if (item.Forecast == "rain")
-        {
+    <div class="col-xs-12 col-sm-2">
 
+        @if (item.FiveDayForcastValue == 1)
+        {
+            <div>
+                <div class="today"> Today <img class="img-responsive" src="@Url.Content("~/Content/img/weather/" + item.Forecast + ".png")" /></div>
+            </div>
+        }
+        else
+        {
+            <img class="img-responsive" src="@Url.Content("~/Content/img/weather/" + item.Forecast + ".png")" />
+        }
+
+        <p>High @item.High F° / @(Math.Round((item.High - 32) * .5555, 0)) C°</p>
+        <p>Low @item.Low F° / @(Math.Round((item.Low - 32) * .5555, 0)) C°</p>
+
+
+        @if (item.Forecast == "rain")
+                {
+            <div class="weather-warning">Pack rain gear and wear waterproof shoes</div>
+        }
+
+        @if (item.Forecast == "thunderstorms")
+                {
+            <div class="weather-warning">Seek shelter and avoid hiking on exposed ridges.</div>
+        }
+        @if (item.Forecast == "sunny")
+                {
+            <div class="weather-warning">Pack sunblock!</div>
+        }
+        @if (item.Forecast == "snow")
+                {
+            <div class="weather-warning">Pack snowshoes</div>
+        }
+        @if (item.High > 75)
+                {
+            <div class="weather-warning">Bring an extra gallon of water</div>
+        }
+        @if (item.Low < 20)
+                {
+            <div class="weather-warning">Its going to be really cold</div>
         }
 
     </div>
-    <div>@item.Forecast</div>
 }

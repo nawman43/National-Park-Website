@@ -1,6 +1,6 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 20px; 
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,3 +16,82 @@ textarea {
     max-width: 280px;
 }
 
+.widewrapper {
+    width: 100%;
+}
+
+    .widewrapper > img {
+        width: 100%;
+    }
+.weather-warning{
+    color:red;
+    font-weight:bold;
+}
+#logo{
+    max-height:42px;
+    margin-right:10px;
+    margin-top:-3px;
+    display:inline-block;
+}
+#promo {
+    text-align: center;
+    padding: 40px;
+    background-image:url(Bridge-Into-The-Woods-HD-Wallpaper-Free.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin-bottom:8%;
+    margin-top:4%;
+   
+}
+.today{
+    font-weight:bold;
+    text-align:center;
+    font-size:120%;
+}
+
+.homepage-image {
+    float: left;
+    padding-right:10px;
+    /*width: 70%;*/
+}
+.homepage-name-and-state{
+   display:inline;
+   font-size:200%;
+   font-weight:bold;
+}
+
+.survey-page{
+    text-align:center;
+}
+
+.smaller{
+    height: 70%;
+}
+
+.survey-result-name{
+    font-size:250%;
+    display:inline;
+}
+.survey-result-votes{
+    font-size:200%;
+    display:block;
+}
+.top-ranked-parks{
+    font-family:Impact;
+    text-align:center;
+    font-size:380%;
+}
+.survey-header{
+    text-align:center;
+    font-family:Consolas;
+    font-size:400%;
+}
+
+input, textarea, select {
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+}
+.homepage-description{
+    font-size:130%;
+}

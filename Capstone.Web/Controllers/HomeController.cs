@@ -16,43 +16,28 @@ namespace Capstone.Web.Controllers
         {
             this.dal = dal;
         }
-        
+
         public ActionResult Home()
         {
-            ParkDAL dal = new ParkDAL();
             List<ParkModel> parks = dal.AllParks();
-            return View("Home" , parks);
+            return View("Home", parks);
         }
 
         public ActionResult Detail(string id)
         {
-            ParkModel park = dal.GetPark(id);
-            park.Weather = dal.GetWeather(id);            
-            return View("Detail", park);
-
-        }
-
-        public ActionResult Survey()
-        {
-            return View("Survey");
-        }
-
-        [HttpPost]
-        public ActionResult Survey(SurveyModel model)
-        {
-            if (!ModelState.IsValid)
             {
-                return View("Survey", model);
+                ParkModel park = dal.GetPark(id);
+                park.Weather = dal.GetWeather(id);
+                return View("Detail", park);
             }
-            else
-            {
-               return RedirectToAction("Result");
-            }            
+
         }
 
-        public ActionResult Result()
-        {
-            return View("Result");
-        }
+        //public ActionResult ConvertCelcius()
+        //{
+
+        //}
     }
 }
+
+//Convert Fahrenheit to Celcius by subtracting 32 & MULTIPLY BY .5556

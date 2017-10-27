@@ -14,6 +14,8 @@ namespace Capstone.Web.DAL
         private const string SQL_AllParks = "Select * From park";
         private const string SQL_SinglePark = "Select park.*,weather.* From park Join weather on weather.parkCode = park.parkCode where weather.parkCode = @parkCode";
         private const string SQL_Weather = "Select * From weather Where weather.parkCode = @weather";
+        private const string SQL_Review = "INSERT INTO survey_result VALUES(@parkCode,@emailAddress,@state,@activityLevel)";
+        private const string SQL_TopPark = "Select count(survey_result.parkCode) as total, park.parkName, park.parkCode from survey_result join park on park.parkCode = survey_result.parkCode group by park.parkName, park.parkCode order by total Desc;";
 
         public List<ParkModel> AllParks()
         {
@@ -132,6 +134,61 @@ namespace Capstone.Web.DAL
                 throw;
             }
             return allWeather;
+        }
+
+        public void NewSurvey(SurveyModel r)
+        {
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_Review, conn);
+                    cmd.Parameters.AddWithValue("@parkCode", r.FavPark);
+                    cmd.Parameters.AddWithValue("@emailAddress", r.Email);
+                    cmd.Parameters.AddWithValue("@state", r.StateOfResidence);
+                    cmd.Parameters.AddWithValue("@activityLevel", r.Activity);
+
+                    cmd.ExecuteNonQuery();
+
+                    return;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<SurveyModel> SurveyResults()
+        {
+            List<SurveyModel> surveys = new List<SurveyModel>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_TopPark, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        SurveyModel p = new SurveyModel();
+                        p.total = Convert.ToInt32(reader["total"]);
+                        p.FavPark = Convert.ToString(reader["parkCode"]);
+                        p.ParkName = Convert.ToString(reader["parkName"]);
+                        
+                        surveys.Add(p);
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return surveys;
         }
     }
 }

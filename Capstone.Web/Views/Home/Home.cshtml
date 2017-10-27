@@ -4,13 +4,27 @@
     ViewBag.Title = "Home";
 }
 
-<h2>Home</h2>
+<div id="promo">
+    <div class="jumbotron " style="border-radius:100%">
+        <img style="max-width:100%;" src="~/Content/logo.png" />
+    </div>
+</div>
 
 @foreach (ParkModel park in Model)
 {
-    <div> @park.ParkName</div>   
-    <div><a href="@Url.Action("Detail","Home", new {id = park.ParkCode })">
-        <img src="@Url.Content("~/Content/img/parks/" + park.ParkCode + ".jpg")" /></a></div>
-    <div> @park.State</div>
-    <div>@park.ParkDescription</div>
+    <div class="row">       
+        <div>
+            <div class="homepage-image">
+                <a href="@Url.Action("Detail","Home", new {id = park.ParkCode })">
+                    <img class="img-responsive" src="@Url.Content("~/Content/img/parks/" + park.ParkCode + ".jpg")" />
+                </a>
+               <hr />
+            </div>
+                <div class="homepage-name-and-state">@park.ParkName, @park.State</div>
+            <br />
+           <br />
+                <div class="homepage-description">@park.ParkDescription</div>
+
+        </div>
+    </div>
 }

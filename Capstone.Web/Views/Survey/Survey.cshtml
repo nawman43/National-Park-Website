@@ -1,0 +1,34 @@
+﻿@using Capstone.Web.Models
+@model SurveyModel
+@{
+    ViewBag.Title = "Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="survey-header">Survey</h2>
+
+<br />
+<form action="@Url.Action("Survey","Survey")" method="post">
+    <div class="survey-page">
+        <div>
+
+            <b>Favorite National Park</b>  @Html.DropDownListFor(m => m.FavPark, SurveyModel.Parks)
+        </div>
+        <br />
+        <div style="padding-left:10%">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+        <br />
+        <div style="padding-left:1%">
+            <b>Activity Level</b>@Html.DropDownListFor(m => m.Activity, SurveyModel.TypesOfActivity)
+        </div>
+        <br />
+        <div style="padding-right:.9%">
+            <b>State of Residence</b>  @Html.DropDownListFor(m => m.StateOfResidence, SurveyModel.States)
+        </div>
+        <br />
+        <button>Submit</button>
+    </div>
+</form>
